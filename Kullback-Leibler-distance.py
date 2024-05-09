@@ -96,7 +96,7 @@ KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution)
 
 print(Style.BRIGHT +"KL divergence:", KL_divergence)
 print(Style.BRIGHT +"KL divergence with switched a and e probabilities:", KL_divergence_opposite)
-
+print("The two values appear the same since the KL divergence is symmetric.\nThe distance between two probability distributions doesn't depend on which distribution is chosen as the first one.")
 # generate switched probabilty sequence
 random_sequence2 = generate_random_sequence_with_distribution(distribution2, sequence_length)
 
