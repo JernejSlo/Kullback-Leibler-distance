@@ -14,13 +14,14 @@ def generate_random_sequence_with_distribution(distribution, length):
 
     return ''.join(sequence)  # Convert array to string for easier use
 
-def kullback_leibler_distance(p,q,sequence):
+def kullback_leibler_distance(p, q):
     KL_divergence = 0
-    character_array = list(sequence)
-
-    for char in character_array:
-        KL_divergence += p[char] * np.log(p[char]/q[char])
-
+    for char in p:
+        if p[char] > 0:  # Only calculate if p[char] is greater than 0
+            if q[char] > 0:
+                KL_divergence += p[char] * np.log(p[char] / q[char])
+            else:
+                return float('inf')  # Return infinity if q[char] is 0 and p[char] is not
     return KL_divergence
 
 def get_frequencies(sequence, distribution):
@@ -90,8 +91,8 @@ for char, code in huffman_codes.items():
     print(f"Character: {char}, Code: {code}")
 print()
 
-KL_divergence = kullback_leibler_distance(distribution,distribution2,random_sequence)
-KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution,random_sequence)
+KL_divergence = kullback_leibler_distance(distribution,distribution2)
+KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution)
 
 print(Style.BRIGHT +"KL divergence:", KL_divergence)
 print(Style.BRIGHT +"KL divergence with switched a and e probabilities:", KL_divergence_opposite)
