@@ -3,8 +3,7 @@ from Huffman.Huffman import *
 import colorama
 from colorama import Fore, Style
 
-colorama.init()
-
+colorama.init(autoreset=True)
 def generate_random_sequence_with_distribution(distribution, length):
     # Extract the keys (characters) and their corresponding probabilities from the distribution dictionary
     characters = list(distribution.keys())
@@ -74,16 +73,16 @@ huffman_sequence = generate_huffman_sequence(random_sequence,huffman_codes)
 
 sequence_length = len(huffman_sequence)
 compression_ratio = len(random_sequence) / sequence_length
-print("Sequences:")
-print("Unencoded Sequence:", random_sequence)
-print("Huffman Encoded Sequence:", huffman_sequence)
+print(Style.BRIGHT +"Sequences:")
+print(Style.BRIGHT +"Unencoded Sequence:", random_sequence)
+print(Style.BRIGHT +"Huffman Encoded Sequence:", huffman_sequence)
 print()
-print("Values:")
-print("Symbols:", symbols)
-print("Frequencies:", frequencies)
-print("Distribution:", distribution)
-print("Encoded Sequence Length:", sequence_length)
-print("Compression Ratio: {:.2f}".format(compression_ratio))
+print(Style.BRIGHT +"Values:")
+print(Style.BRIGHT +"Symbols:", symbols)
+print(Style.BRIGHT +"Frequencies:", frequencies)
+print(Style.BRIGHT +"Distribution:", distribution)
+print(Style.BRIGHT +"Encoded Sequence Length:", sequence_length)
+print(Style.BRIGHT +"Compression Ratio: {:.2f}".format(compression_ratio))
 print()
 
 # Print Huffman codes
@@ -94,8 +93,8 @@ print()
 KL_divergence = kullback_leibler_distance(distribution,distribution2,random_sequence)
 KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution,random_sequence)
 
-print("KL divergence:", KL_divergence)
-print("KL divergence with switched a and e probabilities:", KL_divergence_opposite)
+print(Style.BRIGHT +"KL divergence:", KL_divergence)
+print(Style.BRIGHT +"KL divergence with switched a and e probabilities:", KL_divergence_opposite)
 
 # generate switched probabilty sequence
 random_sequence2 = generate_random_sequence_with_distribution(distribution2, sequence_length)
@@ -116,15 +115,15 @@ sequence_length2 = len(huffman_sequence)
 compression_ratio2 = len(random_sequence) / sequence_length2
 
 print()
-print("New Huffman Encoded Sequence:", huffman_sequence)
+print(Style.BRIGHT +"New Huffman Encoded Sequence:", huffman_sequence)
 print()
-print("Values:")
-print("Symbols:", symbols)
-print("Frequencies:", frequencies)
-print("Distribution:", distribution2)
-print("New Encoded Sequence Length:", sequence_length2)
-print("New Compression Ratio: {:.2f}".format(compression_ratio2))
+print(Style.BRIGHT +"Values:")
+print(Style.BRIGHT +"Symbols:", symbols)
+print(Style.BRIGHT +"Frequencies:", frequencies)
+print(Style.BRIGHT +"Distribution:", distribution2)
+print(Style.BRIGHT +"New Encoded Sequence Length:", sequence_length2)
+print(Style.BRIGHT +"New Compression Ratio: {:.2f}".format(compression_ratio2))
 print()
-print("Differences:")
-print("Length comparison:", "optimal "+Fore.GREEN + str(sequence_length) + Style.RESET_ALL,"switched "+ Fore.RED + str(sequence_length2) + Style.RESET_ALL, "difference "+Fore.YELLOW + str(sequence_length2-sequence_length) + Style.RESET_ALL,  )
-print("Compression Rate comparison:", "optimal "+Fore.GREEN + str(compression_ratio) + Style.RESET_ALL,"switched "+ Fore.RED + str(compression_ratio2) + Style.RESET_ALL, "difference "+Fore.YELLOW + str(compression_ratio-compression_ratio2) + Style.RESET_ALL,  )
+print(Style.BRIGHT +"Differences:")
+print(Style.BRIGHT +"Length comparison:", "optimal "+Fore.GREEN + str(sequence_length) ,"switched "+ Fore.RED + str(sequence_length2) , "difference "+Fore.YELLOW + str(sequence_length2-sequence_length) ,  )
+print(Style.BRIGHT +"Compression Rate comparison:", "optimal "+Fore.GREEN + str(compression_ratio) ,"switched "+ Fore.RED + str(compression_ratio2) , "difference "+Fore.YELLOW + str(compression_ratio-compression_ratio2) ,  )
