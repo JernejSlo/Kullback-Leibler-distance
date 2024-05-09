@@ -132,3 +132,7 @@ print()
 print(Style.BRIGHT +"Differences:")
 print(Style.BRIGHT +"Length comparison:", "optimal "+Fore.GREEN + str(sequence_length) ,"switched "+ Fore.RED + str(sequence_length2) , "difference "+Fore.YELLOW + str(sequence_length2-sequence_length) ,  )
 print(Style.BRIGHT +"Compression Rate comparison:", "optimal "+Fore.GREEN + str(compression_ratio) ,"switched "+ Fore.RED + str(compression_ratio2) , "difference "+Fore.YELLOW + str(compression_ratio-compression_ratio2) ,  )
+
+print()
+print("A high KL divergence between probability distributions, in this case", Style.BRIGHT +str(KL_divergence), "shows that the difference in compression rate\n and the length of the encoding will be substantial when the improper distribution for a given word is used.")
+print("This high difference between the two probability distributions in this case nearly doubled the length of the huffman encoded word\n and reduced the compression rate by about 40%.")
