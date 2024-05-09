@@ -1,21 +1,10 @@
 import numpy as np
 from Huffman.Huffman import *
+import colorama
+from colorama import Fore, Style
 
+colorama.init()
 
-distribution = {
-    "a": 1/2,
-    "b": 1/4,
-    "c": 1/8,
-    "d": 1/16,
-    "e": 1/16
-}
-distribution2 = {
-    "a": 1/16,
-    "b": 1/4,
-    "c": 1/8,
-    "d": 1/16,
-    "e": 1/2
-}
 def generate_random_sequence_with_distribution(distribution, length):
     # Extract the keys (characters) and their corresponding probabilities from the distribution dictionary
     characters = list(distribution.keys())
@@ -54,12 +43,26 @@ def generate_huffman_sequence(sequence, huffman_codes):
 
     return code
 
+# define the distributions
+distribution = {
+    "a": 1/2,
+    "b": 1/4,
+    "c": 1/8,
+    "d": 1/16,
+    "e": 1/16
+}
+distribution2 = {
+    "a": 1/16,
+    "b": 1/4,
+    "c": 1/8,
+    "d": 1/16,
+    "e": 1/2
+}
+
 sequence_length = 1000
 random_sequence = generate_random_sequence_with_distribution(distribution, sequence_length)
 
 frequencies, symbols = get_frequencies(random_sequence, distribution)
-
-print(frequencies,symbols)
 
 # Build the Huffman tree
 root = build_huffman_tree(symbols, frequencies)
@@ -93,3 +96,35 @@ KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution,ra
 
 print("KL divergence:", KL_divergence)
 print("KL divergence with switched a and e probabilities:", KL_divergence_opposite)
+
+# generate switched probabilty sequence
+random_sequence2 = generate_random_sequence_with_distribution(distribution2, sequence_length)
+
+frequencies, symbols = get_frequencies(random_sequence2, distribution)
+
+# Build the Huffman tree
+root = build_huffman_tree(symbols, frequencies)
+
+# Generate Huffman codes
+huffman_codes = generate_huffman_codes(root)
+
+# generate old sequence based on new huffman tree
+huffman_sequence = generate_huffman_sequence(random_sequence,huffman_codes)
+
+
+sequence_length2 = len(huffman_sequence)
+compression_ratio2 = len(random_sequence) / sequence_length
+
+print()
+print("New Huffman Encoded Sequence:", huffman_sequence)
+print()
+print("Values:")
+print("Symbols:", symbols)
+print("Frequencies:", frequencies)
+print("Distribution:", distribution2)
+print("New Encoded Sequence Length:", sequence_length2)
+print("New Compression Ratio: {:.2f}".format(compression_ratio2))
+print()
+print("Differences:")
+print("Length comparison:", "optimal "+Fore.GREEN + str(sequence_length) + Style.RESET_ALL,"switched "+ Fore.RED + str(sequence_length2) + Style.RESET_ALL, "difference "+Fore.YELLOW + str(sequence_length2-sequence_length) + Style.RESET_ALL,  )
+print("Compression Rate comparison:", "optimal "+Fore.GREEN + str(compression_ratio) + Style.RESET_ALL,"switched "+ Fore.RED + str(compression_ratio2) + Style.RESET_ALL, "difference "+Fore.YELLOW + str(compression_ratio-compression_ratio2) + Style.RESET_ALL,  )
