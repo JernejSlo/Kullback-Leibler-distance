@@ -1,5 +1,7 @@
 import heapq
 
+# CODE WAS TAKEN FROM GEEKS FOR GEEKS
+# https://www.geeksforgeeks.org/huffman-coding-in-python/
 
 class Node:
     def __init__(self, symbol=None, frequency=None):

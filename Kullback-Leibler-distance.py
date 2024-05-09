@@ -81,10 +81,10 @@ print(Style.BRIGHT +"Values:")
 print(Style.BRIGHT +"Symbols:", symbols)
 print(Style.BRIGHT +"Frequencies:", frequencies)
 print(Style.BRIGHT +"Distribution:", distribution)
-print(Style.BRIGHT +"Encoded Sequence Length:", sequence_length)
-print(Style.BRIGHT +"Compression Ratio: {:.2f}".format(compression_ratio))
+print(Style.BRIGHT +"Encoded Sequence Length:", Fore.GREEN + str(sequence_length))
+print(Style.BRIGHT +"Compression Ratio:",Fore.GREEN + str(compression_ratio))
 print()
-
+print(Style.BRIGHT +"Huffman with original probability distribution")
 # Print Huffman codes
 for char, code in huffman_codes.items():
     print(f"Character: {char}, Code: {code}")
@@ -113,6 +113,10 @@ huffman_sequence = generate_huffman_sequence(random_sequence,huffman_codes)
 
 sequence_length2 = len(huffman_sequence)
 compression_ratio2 = len(random_sequence) / sequence_length2
+print()
+print(Style.BRIGHT +"New Huffman tree with switched probability distribution")
+for char, code in huffman_codes.items():
+    print(f"Character: {char}, Code: {code}")
 
 print()
 print(Style.BRIGHT +"New Huffman Encoded Sequence:", huffman_sequence)
@@ -121,8 +125,8 @@ print(Style.BRIGHT +"Values:")
 print(Style.BRIGHT +"Symbols:", symbols)
 print(Style.BRIGHT +"Frequencies:", frequencies)
 print(Style.BRIGHT +"Distribution:", distribution2)
-print(Style.BRIGHT +"New Encoded Sequence Length:", sequence_length2)
-print(Style.BRIGHT +"New Compression Ratio: {:.2f}".format(compression_ratio2))
+print(Style.BRIGHT +"New Encoded Sequence Length:", Fore.RED + str(sequence_length2))
+print(Style.BRIGHT +"New Compression Ratio:",(Fore.RED + str(compression_ratio2)))
 print()
 print(Style.BRIGHT +"Differences:")
 print(Style.BRIGHT +"Length comparison:", "optimal "+Fore.GREEN + str(sequence_length) ,"switched "+ Fore.RED + str(sequence_length2) , "difference "+Fore.YELLOW + str(sequence_length2-sequence_length) ,  )
