@@ -31,7 +31,7 @@ def kullback_leibler_distance(p,q,sequence):
     character_array = list(sequence)
 
     for char in character_array:
-        KL_divergence += p[char] * math.log2(p[char]/q[char])
+        KL_divergence += p[char] * np.log(p[char]/q[char])
 
     return KL_divergence
 
