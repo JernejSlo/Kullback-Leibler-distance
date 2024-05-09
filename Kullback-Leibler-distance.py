@@ -1,6 +1,6 @@
-import math
-from random import random
 import numpy as np
+from Huffman.Huffman import *
+
 
 distribution = {
     "a": 1/2,
@@ -13,8 +13,8 @@ distribution2 = {
     "a": 1/16,
     "b": 1/4,
     "c": 1/8,
-    "d": 1/2,
-    "e": 1/16
+    "d": 1/16,
+    "e": 1/2
 }
 def generate_random_sequence_with_distribution(distribution, length):
     # Extract the keys (characters) and their corresponding probabilities from the distribution dictionary
@@ -35,9 +35,61 @@ def kullback_leibler_distance(p,q,sequence):
 
     return KL_divergence
 
+def get_frequencies(sequence, distribution):
+    frequencies = {}
+    symbols = distribution.keys()
+    for symbol in symbols:
+        frequencies[symbol] = 0
+
+    for symbol in sequence:
+        frequencies[symbol] += 1
+
+    return list(frequencies.values()), list(symbols)
+
+
+def generate_huffman_sequence(sequence, huffman_codes):
+    code = ""
+    for symbol in sequence:
+        code += huffman_codes[symbol]
+
+    return code
 
 sequence_length = 1000
 random_sequence = generate_random_sequence_with_distribution(distribution, sequence_length)
 
+frequencies, symbols = get_frequencies(random_sequence, distribution)
+
+print(frequencies,symbols)
+
+# Build the Huffman tree
+root = build_huffman_tree(symbols, frequencies)
+
+# Generate Huffman codes
+huffman_codes = generate_huffman_codes(root)
+
+huffman_sequence = generate_huffman_sequence(random_sequence,huffman_codes)
+
+sequence_length = len(huffman_sequence)
+compression_ratio = len(random_sequence) / sequence_length
+print("Sequences:")
+print("Unencoded Sequence:", random_sequence)
+print("Huffman Encoded Sequence:", huffman_sequence)
+print()
+print("Values:")
+print("Symbols:", symbols)
+print("Frequencies:", frequencies)
+print("Distribution:", distribution)
+print("Encoded Sequence Length:", sequence_length)
+print("Compression Ratio: {:.2f}".format(compression_ratio))
+print()
+
+# Print Huffman codes
+for char, code in huffman_codes.items():
+    print(f"Character: {char}, Code: {code}")
+print()
+
 KL_divergence = kullback_leibler_distance(distribution,distribution2,random_sequence)
-print(KL_divergence)
+KL_divergence_opposite = kullback_leibler_distance(distribution2,distribution,random_sequence)
+
+print("KL divergence:", KL_divergence)
+print("KL divergence with switched a and e probabilities:", KL_divergence_opposite)
