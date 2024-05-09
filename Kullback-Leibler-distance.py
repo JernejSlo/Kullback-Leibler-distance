@@ -113,7 +113,7 @@ huffman_sequence = generate_huffman_sequence(random_sequence,huffman_codes)
 
 
 sequence_length2 = len(huffman_sequence)
-compression_ratio2 = len(random_sequence) / sequence_length
+compression_ratio2 = len(random_sequence) / sequence_length2
 
 print()
 print("New Huffman Encoded Sequence:", huffman_sequence)
