@@ -57,8 +57,13 @@ random_sequence = generate_random_sequence_with_distribution(distribution, seque
 KL_divergence = kullback_leibler_distance(distribution,distribution2,random_sequence)
 print(KL_divergence)
 
+print("-----------------------")
+
+print("sequence length and compression ratio with Huffman coding")
 print("Sequence length: ")
 print("compression ratio: ")
+
+print("-----------------------")
 
 print("KL-Divergende (p || q): ")
 
